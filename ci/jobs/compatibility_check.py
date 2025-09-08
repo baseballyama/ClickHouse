@@ -128,7 +128,16 @@ def main():
     check_distributions = (
         "aarch64" not in check_name.lower() and "arm" not in check_name.lower()
     )
-    Shell.check(f"chmod +x {temp_path}/clickhouse", verbose=True, strict=True)
+
+    for package in temp_path.iterdir():
+        if package.suffix == ".deb":
+            Shell.check(
+                f"dpkg -x {package} {temp_path} && rm {package}",
+                verbose=True,
+                strict=True,
+            )
+            Shell.check(f"cp {temp_path}/usr/lib/debug/usr/bin/clickhouse.debug {temp_path}/clickhouse", verbose=True, strict=True)
+    # Shell.check(f"chmod +x {temp_path}/clickhouse", verbose=True, strict=True)
 
     run_commands = []
 
