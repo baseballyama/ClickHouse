@@ -589,7 +589,7 @@
 /* #undef KRB5_ATHENA_COMPAT */
 
 /* Define for DNS support of locating realms and KDCs */
-#undef KRB5_DNS_LOOKUP
+#define KRB5_DNS_LOOKUP 1
 
 /* Define to enable DNS lookups of Kerberos realm names */
 /* #undef KRB5_DNS_LOOKUP_REALM */
